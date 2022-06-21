@@ -47,7 +47,7 @@ export default function Produse() {
 
 
   const onKeyUp = (e) => {
-    if (e.keyCode == 13) loadUsers();
+    if (e.keyCode === 13) loadUsers();
   }
 
 

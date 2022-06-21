@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import md5 from "js-md5";
 import { useNavigate } from "react-router-dom";
 import DataTable from "../componente/dataTable";
 import { useParams } from 'react-router-dom';
@@ -48,7 +47,7 @@ function Servicii({ user }) {
 
 
     const onKeyUp = (e) => {
-        if (e.keyCode == 13) loadServicii();
+        if (e.keyCode === 13) loadServicii();
     }
 
 
