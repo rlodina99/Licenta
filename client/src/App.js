@@ -15,6 +15,7 @@ import EditUser from './pagini/edituser'
 import AddUser from './pagini/adduser'
 import AddServ from './pagini/addservicii'
 import EditServ from './pagini/editservicii'
+import DetaliuServici from './pagini/detaliuServici'
 
 
 
@@ -33,6 +34,7 @@ function App() {
 
       <Routes>
         <Route exact path="/" element={<Home />} />
+        <Route path="/detaliuServici/:idServiciu" element={<DetaliuServici/>} />
         <Route path="/login" element={<Login onLoginCompleted={onLoginCompleted} />} />
         <Route element={<AuthRoute user={user} redirectTo='/login' />}>
           <Route path="/firma" element={<Firma user={user} />} />

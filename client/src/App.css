@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+
 }
 
 .App-logo {
@@ -49,17 +50,55 @@
 }
 
 
-.gradient-custom {
-  /* fallback for old browsers */
-  background: #6a11cb;
-  
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-  
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
-  }
 
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities; */
+
+
+#wrapper {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* border: 1px solid blue; */
+}
+
+#divNegru {
+
+  background: #222;
+  display: inline-block;
+  vertical-align: top;
+  width: 320px;
+  height: 320px;
+  color: white;
+  font-weight: bold;
+  padding: 25px;
+  border-radius: 4px;
+  font-size: 90%;
+  /* pointer-events: none; */
+
+}
+
+
+#div1 {
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-left: 20px;
+  padding-top: 20px;
+  display: inline-block;
+  width: 320px;
+  height: 320px;
+  /* border: 1px solid red; */
+  background-color: #f8f9fa;
+}
+
+#div2 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  vertical-align: top;
+  text-align: center;
+  display: inline-block;
+  padding-left: 20px;
+  padding-top: 20px;
+  width: 350px;
+  height: 320px;
+  background-color: #f8f9fa;
+  /* border: 1px solid green; */
+}

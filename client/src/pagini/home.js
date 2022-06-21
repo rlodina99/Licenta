@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import DataTable from "../componente/dataTable";
 
 
-export default function Home() {
+export default function Home(props) {
 
   const [data, setData] = useState(null);
   const [data1, setData1] = useState(null);
@@ -36,7 +36,7 @@ export default function Home() {
         setSubCategorii(data);
       });
     setId_cat(idCat);
-    console.dir(idCat);
+    // console.dir(idCat);
   }
 
 
@@ -56,10 +56,9 @@ export default function Home() {
         }
         else {
           // console.log(`${serviciu.length} loaded`);
-          console.dir(serviciu);
+          console.log(serviciu);
           setData1(serviciu);
         }
-        // setDataKey(dataKey + 1);
       })
   }
 
@@ -108,6 +107,8 @@ export default function Home() {
 
 
         {console.log(`Categoria:  ${id_cat}  si subcategoria ${id_subCat}`)}
+        {/* {console.log(data1.id)} */}
+        
 
         {
           <DataTable
@@ -140,7 +141,7 @@ export default function Home() {
               },
               {
                 width: '100px',
-                render: item => <button type="button" className="btn btn-primary" onClick={() => navigate(`/programeaza`)}> Programeaza </button>
+                render: item => <button type="button" className="btn btn-primary" onClick={() => navigate(`/detaliuServici/${item.id}`)}>alege</button>
               },
 
 

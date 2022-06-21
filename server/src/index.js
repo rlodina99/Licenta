@@ -146,6 +146,19 @@ app.get('/api/categorii', async (req, res) => {
 
 });
 
+app.get('/api/subcategorieUser', async (req, res) => {
+
+  const { id } = req.query;
+  try {
+    const data = await execSQL(`SELECT *  FROM subcategorie where id =${id}`);
+    res.json(data.rows);
+  }
+  catch (error) {
+    res.json({ error: error.message })
+  }
+
+});
+
 app.get('/api/subcategorie', async (req, res) => {
 
   const { id_cat } = req.query;
