@@ -1,0 +1,41 @@
+.tbl tr {
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-orient: horizontal;
+   -webkit-box-direction: normal;
+   -ms-flex-direction: row;
+   flex-direction: row;
+}
+
+
+.tbl td,
+.tbl th {
+   display: block;
+   /*      
+   flex-grow | flex-shrink | flex-basis   */
+   -ms-flex: 1 1 auto;
+   flex: 1 1 auto;
+}
+
+.tbl .tbl-thead {
+   font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+   .table-responsive-stack tr {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      border-bottom: 3px solid #ccc;
+      display: block;
+
+   }
+
+   /*  IE9 FIX   */
+   .table-responsive-stack td {
+      float: left\9;
+      width: 100%;
+   }
+}
