@@ -56,7 +56,7 @@ export default function Menu({ user, onLogoutCompleted }) {
               </button>
               &nbsp;
               <button type="button" className="btn btn-secondary" onClick={() => { navigate(`/programari`) }}>
-                Programari
+                Calendar Programari
               </button>
               &nbsp;
               <button type="button" className="btn btn-secondary" onClick={() => { navigate(`/users`) }}>

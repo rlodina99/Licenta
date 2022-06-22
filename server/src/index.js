@@ -84,7 +84,20 @@ app.get('/api/deleteUser', async (req, res) => {
 
 });
 
-app.get('/api/deleteServicii', async (req, res) => {
+app.get('/api/deleteProgramare', async (req, res) => {
+  // const id = req.query.id;
+  const { id } = req.query;
+  try {
+    await execSQL(`DELETE FROM programari where id =${id}`);
+    res.json({ ok: 1 })
+  }
+  catch (error) {
+    res.json({ error: error.message })
+  }
+
+});
+
+app.get('/api/deleteProgr', async (req, res) => {
   // const id = req.query.id;
   const { id } = req.query;
   try {
@@ -96,7 +109,6 @@ app.get('/api/deleteServicii', async (req, res) => {
   }
 
 });
-
 
 app.get('/api/getUser', async (req, res) => {
   // const id = req.query.id;
@@ -240,6 +252,21 @@ app.get('/api/serviciu', async (req, res) => {
 
 });
 
+app.get('/api/programari', async (req, res) => {
+
+
+  let sqlStmt = `SELECT id, numeclient, prenumeclient, telclient, id_serviciu, id_users, data_programare FROM programari`;
+
+  try {
+    const data = await execSQL(sqlStmt);
+    res.json(data.rows)
+  }
+  catch (error) {
+    console.log('Eror on get users' + error)
+    res.json({ error })
+  }
+});
+
 
 app.get('/api/servicii', async (req, res) => {
 
@@ -280,6 +307,23 @@ app.post('/api/addServ', async (req, res) => {
 
   try {
     await execSQL(`insert into servicii (id_users, id_subcategorie, denumire, descriere, pret, durata) values ('${id_users}', '${id_subcategorie}', '${denumire}', '${descriere}', ${pret}, ${durata})`);
+    res.json({ ok: 1 });
+  }
+  catch (error) {
+    res.json({ error: error.message })
+  }
+
+});
+
+app.post('/api/addProgramare', async (req, res) => {
+
+  let { nume, prenume, email, tel, id_serviciu, id_users, data_programare } = req.body;
+
+  if (!email) return res.json({ error: 'Email invalid' });
+
+
+  try {
+    await execSQL(`insert into programari (numeclient, prenumeclient, emailclient, telclient, id_serviciu, id_users, data_programare) values ('${nume}', '${prenume}', '${email}', '${tel}', ${id_serviciu}, ${id_users}, '${data_programare}')`);
     res.json({ ok: 1 });
   }
   catch (error) {
