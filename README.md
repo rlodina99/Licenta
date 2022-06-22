@@ -33,6 +33,8 @@ In ambele directoare :
 
 # Pagina de register ( pt Firme ) 
 ( register )
+- toate campurile sunt obligatorii
+- dupa selectarea "Domeniului de activitate" si inregistrarea firmei , la adaugarea unui nou personal aceasta va fi obligata sa aleaga "Specializarea" acestuia din "Domeniul de activitate" ales la inregistrare
 
 <img src="/SS Licenta/register.png" alt="register"/>
 
