@@ -48,5 +48,10 @@ In ambele directoare :
 
 # Meniu cu serviciile personal ( pt Firme ) 
 ( meniu cu serviciile oferite de un personal al firmei respectiv atributiile lor )
+- se poate cauta dupa "denumirea" serviciului din input boxul dreapta sus respectiv apasand butonul "cauta"
+- serviciile se pot sorta in ordine cresc. sau desc. dupa "denumire" , "durata" , "pret" , " descriere" facand click pe respectivele campuri
+- se pot adauga servicii noi pentru personalul selectat
+- se pot edita serviciile existente al personalul selectat
+- se pot sterge serviciile existente al personalul selectat
 
 <img src="/SS Licenta/meniu_servicii_personal.png" alt="meniu_servicii_personal"/>
