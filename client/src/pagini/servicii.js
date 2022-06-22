@@ -2,11 +2,20 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DataTable from "../componente/dataTable";
 import { useParams } from 'react-router-dom';
+import { Modal, Button } from 'react-bootstrap';
 
 function Servicii({ user }) {
 
     const [data, setData] = useState(null);
     let navigate = useNavigate();
+    const [show, setShow] = useState(false);
+    const [idServici, setIdServici] = useState('');
+    const handleClose = () => setShow(false);
+    const handleShow = (idx) => {
+        setIdServici(idx);
+        setShow(true);
+    }
+
 
     useEffect(() => {
         loadServicii();
@@ -31,11 +40,14 @@ function Servicii({ user }) {
     }
 
 
-    const deleteServicii = (id) => {
-        fetch(`api/deleteServicii?id=${id}`)
+    const deleteServicii = () => {
+
+        handleClose();
+        
+        fetch(`api/deleteServicii?id=${idServici}`)
             .then(response => response.json())
             .then(data => {
-                console.dir(data);
+                // console.dir(data);
                 if (data.error)
                     alert('Eroare la stergere: ' + data.error)
                 else {
@@ -48,6 +60,35 @@ function Servicii({ user }) {
 
     const onKeyUp = (e) => {
         if (e.keyCode === 13) loadServicii();
+    }
+
+    function Delete() {
+
+        return (
+            <>
+                <Modal show={show} >
+                    <Modal.Header >
+                        <Modal.Title>Atentie </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+
+                        Suntei sigur ca doriti sa stergeti serviciul?
+
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="success" onClick={handleClose}>
+                            Anulare
+                        </Button>
+                        <Button variant="danger" onClick={deleteServicii}>
+                            Sterge
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </>
+
+        )
+
     }
 
 
@@ -114,7 +155,7 @@ function Servicii({ user }) {
                             {
 
                                 width: '100px',
-                                render: item => <button type="button" className="btn btn-danger" onClick={() => deleteServicii(user.id)}> delete </button>
+                                render: item => <button type="button" className="btn btn-danger" onClick={() => handleShow(item.id)}> delete </button>
                             },
 
                         ]}
@@ -126,7 +167,7 @@ function Servicii({ user }) {
                     />
                 }
             </form>
-
+            <Delete />
         </>
     )
 }

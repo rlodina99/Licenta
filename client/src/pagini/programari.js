@@ -2,11 +2,21 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DataTable from "../componente/dataTable";
 import { useParams } from 'react-router-dom';
+import { Modal, Button } from 'react-bootstrap';
 
 function Programari({ user }) {
 
   const [data, setData] = useState(null);
+  const [show, setShow] = useState(false);
+  const [idProgramare, setIdProgramare] = useState('');
+
   let navigate = useNavigate();
+
+  const handleClose = () => setShow(false);
+  const handleShow = (idx) => {
+    setIdProgramare(idx);
+    setShow(true);
+  }
 
   useEffect(() => {
     loadProgramari();
@@ -23,19 +33,23 @@ function Programari({ user }) {
         }
         else {
           // console.log(`${programare.length} loaded`);
-          console.dir(programare);
+          // console.dir(programare);
           setData(programare);
+
         }
-        // setDataKey(dataKey + 1);
+
       })
   }
 
 
-  const deleteProgramare = (id) => {
-    fetch(`api/deleteProgramare?id=${id}`)
+  const deleteProgramare = () => {
+
+    handleClose();
+
+    fetch(`api/deleteProgramare?id=${idProgramare}`)
       .then(response => response.json())
       .then(data => {
-        console.dir(data);
+        // console.dir(data);
         if (data.error)
           alert('Eroare la stergere: ' + data.error)
         else {
@@ -51,17 +65,46 @@ function Programari({ user }) {
   }
 
 
+
+  function Delete() {
+
+    return (
+      <>
+        <Modal show={show} >
+          <Modal.Header >
+            <Modal.Title>Atentie </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+
+            Suntei sigur ca doriti sa stergeti programarea?
+
+
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="success" onClick={handleClose}>
+              Anulare
+            </Button>
+            <Button variant="danger" onClick={deleteProgramare}>
+              Sterge
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+
+    )
+
+  }
+
+
   return (
     <>
 
       <form className='w-75 mx-auto'>
-        <h1>
-          {/* {user.id} */}
-          Test
 
+        <h1>
+          Calendar
         </h1>
 
-        <br></br>
         {/* <button type="button" className="btn btn-success" onClick={() => navigate(`/users/${user.id}/addservicii`)}>
                     Adaugare servicii </button>
                 &nbsp;
@@ -122,7 +165,7 @@ function Programari({ user }) {
               {
 
                 width: '100px',
-                render: item => <button type="button" className="btn btn-danger" onClick={() => deleteProgramare(item.id)}> delete </button>
+                render: item => <button type="button" className="btn btn-danger" onClick={() => handleShow(item.id)}> delete </button>
               },
 
             ]}
@@ -132,8 +175,11 @@ function Programari({ user }) {
               asc: true
             }}
           />
+
         }
       </form>
+
+      <Delete />
 
     </>
   )

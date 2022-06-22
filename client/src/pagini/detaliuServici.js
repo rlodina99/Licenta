@@ -345,7 +345,7 @@ export default function DetaliuServici() {
                 </div>
                 <br></br>
                 <br></br>
-                <button type="submit" className="btn btn-success mb-5" onClick={() => { rezervare() }}>Continua</button>
+                <button type="submit" className="btn btn-success mb-5" onClick={() =>  rezervare() }>Continua</button>
                 &nbsp;
                 <button type="cancel" className="btn btn-danger mb-5" onClick={() => navigate(`/`)}>Cancel</button>
 

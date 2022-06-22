@@ -84,6 +84,19 @@ app.get('/api/deleteUser', async (req, res) => {
 
 });
 
+app.get('/api/deleteServicii', async (req, res) => {
+  // const id = req.query.id;
+  const { id } = req.query;
+  try {
+    await execSQL(`DELETE FROM servicii where id =${id}`);
+    res.json({ ok: 1 })
+  }
+  catch (error) {
+    res.json({ error: error.message })
+  }
+
+});
+
 app.get('/api/deleteProgramare', async (req, res) => {
   // const id = req.query.id;
   const { id } = req.query;
