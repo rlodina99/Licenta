@@ -112,7 +112,7 @@ export default function DetaliuServici() {
 
 
                 <Modal show={show} >
-                    <Modal.Header closeButton>
+                    <Modal.Header>
                         <Modal.Title>Rezervare {datetime}  </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>

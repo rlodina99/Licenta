@@ -84,7 +84,7 @@ app.get('/api/deleteUser', async (req, res) => {
 
 });
 
-app.get('/api/deleteServicii', async (req, res) => {
+app.get('/deleteServicii', async (req, res) => {
   // const id = req.query.id;
   const { id } = req.query;
   try {

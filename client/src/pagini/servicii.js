@@ -44,7 +44,7 @@ function Servicii({ user }) {
 
         handleClose();
         
-        fetch(`api/deleteServicii?id=${idServici}`)
+        fetch(`/deleteServicii?id=${idServici}`)
             .then(response => response.json())
             .then(data => {
                 // console.dir(data);
