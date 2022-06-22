@@ -13,3 +13,4 @@ In ambele directoare :
   - gasesti in package.json un script pt start
   - trebuie rulat in fircare director _npm i_ (i=install : sa inataleze dependintele) 
 
+<img src="/SS Licenta/client.png" alt="client"/>
