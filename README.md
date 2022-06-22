@@ -21,6 +21,11 @@ In ambele directoare :
 
 <img src="/SS Licenta/home.png" alt="home"/>
 
+# Pagina de home / cautare serviciu dorit 
+( selectarea serviciului )
+
+<img src="/SS Licenta/cautare.png" alt="cautare"/>
+
 # Pagina de register ( pt Firme ) 
 ( register )
 
