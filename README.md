@@ -43,15 +43,22 @@ In ambele directoare :
 
 # Meniu cu personal ( pt Firme ) 
 ( meniu cu tot personalul firmei respectiv datele lor )
+- se poate cauta personal dupa "numele" persoanei din input boxul dreapta sus respectiv apasand butonul "cauta"
+- tabelul cu personalul firmei se pot sorta in ordine cresc. sau desc. dupa "nume" , "prenume" , "telefon" , " email", "specializare" facand click pe respectivele campuri
+- se poate adauga personal nou pentru firma ( butonul "Adaugare personal" )
+- se poate sterge personalul existent al firmei ( butonul "servicii" )
+- se pot edita personalul existent al firmei ( butonul "edit" )
+- se pot sterge personalul existent al firmei ( butonul "delete" )
 
 <img src="/SS Licenta/meniu_personal_firme.png" alt="meniu_personal_firme"/>
 
 # Meniu cu serviciile personal ( pt Firme ) 
 ( meniu cu serviciile oferite de un personal al firmei respectiv atributiile lor )
-- se poate cauta dupa "denumirea" serviciului din input boxul dreapta sus respectiv apasand butonul "cauta"
+- se poate cauta dupa "denumirea" serviciului din input boxul dreapta sus ( butonul "Cauta" )
+- se poate reveni la meniul cu intreg personalul ( butonul "Inapoi" )
 - serviciile se pot sorta in ordine cresc. sau desc. dupa "denumire" , "durata" , "pret" , " descriere" facand click pe respectivele campuri
-- se pot adauga servicii noi pentru personalul selectat
-- se pot edita serviciile existente al personalul selectat
-- se pot sterge serviciile existente al personalul selectat
+- se pot adauga servicii noi pentru personalul selectat ( butonul "Adaugare servicii" )
+- se pot edita serviciile existente al personalul selectat ( butonul "edit" )
+- se pot sterge serviciile existente al personalul selectat ( butonul "delete" )
 
 <img src="/SS Licenta/meniu_servicii_personal.png" alt="meniu_servicii_personal"/>
