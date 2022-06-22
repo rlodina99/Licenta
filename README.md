@@ -26,6 +26,11 @@ In ambele directoare :
 
 <img src="/SS Licenta/cautare.png" alt="cautare"/>
 
+# Selectare Data si ora serviciu dorit 
+( alegerea datei si a orei de catre client pentru serviciul ales)
+
+<img src="/SS Licenta/alegere_serviciu_client.png" alt="alegere_serviciu_client"/>
+
 # Pagina de register ( pt Firme ) 
 ( register )
 
