@@ -7,14 +7,10 @@
 
 # Server
  - simple API server dezvoltat cu express
- - baza de date este ProgreSQL (vezi db.js)
+ - baza de date este ProgreSQL
 
 <img src="/SS Licenta/server.png" alt="server"/>
 
-In ambele directoare : 
-  - actualizeaa in db.js URL de acces la baza de date
-  - gasesti in package.json un script pt start
-  - trebuie rulat in fircare director _npm i_ (i=install : sa inataleze dependintele) 
 
 # Pagina de home 
 ( alegerea serviciului dorit si selectarea acestuia )
