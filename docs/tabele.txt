@@ -1,0 +1,167 @@
+DROP TABLE IF EXISTS "public"."categorie";
+-- This script only contains the table creation statements and does not fully represent the table in database. It's still missing: indices, triggers. Do not use it as backup.
+
+-- Table Definition
+CREATE TABLE "public"."categorie" (
+    "id" int4 NOT NULL,
+    "nume" text NOT NULL,
+    PRIMARY KEY ("id")
+);
+
+INSERT INTO "public"."categorie" ("id", "nume") VALUES
+(1, 'Medicina'),
+(2, 'Hairstyle'),
+(3, 'Beauty');
+
+DROP TABLE IF EXISTS "public"."subcategorie";
+-- This script only contains the table creation statements and does not fully represent the table in database. It's still missing: indices, triggers. Do not use it as backup.
+
+-- Table Definition
+CREATE TABLE "public"."subcategorie" (
+    "id" int4 NOT NULL,
+    "nume" text NOT NULL,
+    "id_cat" int4,
+    CONSTRAINT "subcategorie_id_cat_fkey" FOREIGN KEY ("id_cat") REFERENCES "public"."categorie"("id") ON DELETE CASCADE,
+    PRIMARY KEY ("id")
+);
+
+INSERT INTO "public"."subcategorie" ("id", "nume", "id_cat") VALUES
+(1, 'Dermatolog', 1),
+(2, 'Stomatolog', 1),
+(3, 'Cardiolog', 1),
+(4, 'Pediatru', 1),
+(5, 'Frizer', 2),
+(6, 'Coafura', 2),
+(7, 'Barber', 2),
+(8, 'FacialBeauty', 3),
+(9, 'Manichiura', 3);
+
+DROP TABLE IF EXISTS "public"."firme";
+-- This script only contains the table creation statements and does not fully represent the table in database. It's still missing: indices, triggers. Do not use it as backup.
+
+-- Table Definition
+CREATE TABLE "public"."firme" (
+    "id" int4 NOT NULL,
+    "id_cat" int4,
+    "nume" text NOT NULL,
+    "cf" text NOT NULL,
+    "email" text NOT NULL,
+    "password" text NOT NULL,
+    CONSTRAINT "firme_id_cat_fkey" FOREIGN KEY ("id_cat") REFERENCES "public"."categorie"("id") ON DELETE CASCADE,
+    PRIMARY KEY ("id")
+);
+
+INSERT INTO "public"."firme" ("id", "id_cat", "nume", "cf", "email", "password") VALUES
+(6, 1, 'Medicina SRL', '123', 'medicina@gmail.com', '123'),
+(1, 2, 'Hairstyle SRL', 'RO123123', 'hairstyle@gmail.com', '123'),
+(7, 3, 'Beauty SRL', 'RO19902923', 'beauty@gmail.com', '123');
+
+DROP TABLE IF EXISTS "public"."users";
+-- This script only contains the table creation statements and does not fully represent the table in database. It's still missing: indices, triggers. Do not use it as backup.
+
+-- Table Definition
+CREATE TABLE "public"."users" (
+    "id" int4 NOT NULL,
+    "id_firma" int4,
+    "id_subcat" int4,
+    "nume" text NOT NULL,
+    "prenume" text NOT NULL,
+    "email" text NOT NULL,
+    "tel" text NOT NULL,
+    "adresa" text NOT NULL,
+    "oras" text NOT NULL,
+    "rating" int4,
+    "review" text,
+    "avatar" text,
+    CONSTRAINT "users_id_firma_fkey" FOREIGN KEY ("id_firma") REFERENCES "public"."firme"("id") ON DELETE CASCADE,
+    CONSTRAINT "users_id_subcat_fkey" FOREIGN KEY ("id_subcat") REFERENCES "public"."subcategorie"("id") ON DELETE CASCADE,
+    PRIMARY KEY ("id")
+);
+
+INSERT INTO "public"."users" ("id", "id_firma", "id_subcat", "nume", "prenume", "email", "tel", "adresa", "oras", "rating", "review", "avatar") VALUES
+(2, 1, 7, 'Lodina', 'Razvan', 'rlodina99@gmail.com', '0262.000.112', 'str. Busuioc nr. 8', 'Baia Mare', NULL, NULL, NULL),
+(7, 6, 1, 'Dr. Anca', 'Opris', 'dracncaopris@gmail.com', '0261.121.121', 'str. Nucului nr. 8', 'Baia Mare', NULL, NULL, NULL),
+(8, 6, 4, 'Dr. Marius', 'Marinca', 'mariusmarinca@gmail.com', '0221.232.232', 'Panselutei 1', 'Baia Mare', NULL, NULL, NULL),
+(9, 6, 2, 'Dr. Madalina', 'Pop', 'madalinapop@gmail.com', '0221.000.202', 'Unirii 32A', 'Baia Mare', NULL, NULL, NULL),
+(4, 6, 3, 'Dr. Danila', 'Danina Maria Iulia', 'popcostache@gmail.com', '0262.000.114', 'str. Nucului 23', 'Baia Mare', NULL, NULL, NULL),
+(5, 1, 5, 'Popescu ', 'Ionel', 'rlodina@gmail.com', '0262.000.115', 'str. Nucului 232', 'Baia Mare', NULL, NULL, NULL),
+(10, 1, 6, 'Corina', 'Micle', 'micle@gmail.com', '0262.000.000', 'Macului 28', 'Baia Mare', NULL, NULL, NULL),
+(11, 7, 8, 'Mirela', 'Pop', 'mirePop@gmail.com', '0362.666.123', 'str. Unirii Nr. 28', 'Sacalaseni', NULL, NULL, NULL),
+(12, 7, 9, 'Tamas', 'Madalina', 'mada876@gmail.com', '0362.000.001', 'str. Prunului nr. 2', 'Baia Mare', NULL, NULL, NULL);
+
+DROP TABLE IF EXISTS "public"."servicii";
+-- This script only contains the table creation statements and does not fully represent the table in database. It's still missing: indices, triggers. Do not use it as backup.
+
+-- Table Definition
+CREATE TABLE "public"."servicii" (
+    "id" int4 NOT NULL,
+    "id_users" int4,
+    "id_subcategorie" int4,
+    "denumire" text NOT NULL,
+    "descriere" text,
+    "pret" int4 NOT NULL,
+    "durata" int4 NOT NULL,
+    CONSTRAINT "servicii_id_users_fkey" FOREIGN KEY ("id_users") REFERENCES "public"."users"("id") ON DELETE CASCADE,
+    CONSTRAINT "servicii_id_subcategorie_fkey" FOREIGN KEY ("id_subcategorie") REFERENCES "public"."subcategorie"("id") ON DELETE CASCADE,
+    PRIMARY KEY ("id")
+);
+
+INSERT INTO "public"."servicii" ("id", "id_users", "id_subcategorie", "denumire", "descriere", "pret", "durata") VALUES
+(5, 2, 7, 'tuns barba', 'tuns din foarfeca', 20, 10),
+(7, 5, 5, 'tuns scurt', 'undefined', 30, 25),
+(8, 5, 5, 'tuns foarfeca', 'undefined', 25, 15),
+(4, 4, 3, 'Consultatie', 'cardiologie + ecocardiografie', 200, 20),
+(11, 4, 3, 'Consultatie ', 'cardiologie + ecocardiografie + EKG', 300, 30),
+(12, 4, 3, 'Consultatie ', 'cardiologie + ecocardiografie + EKG copii', 200, 30),
+(13, 4, 3, 'Consultatie ', 'cardiologie', 150, 20),
+(14, 7, 1, 'Consultatie', 'dermatologie', 150, 20),
+(15, 7, 1, 'Biopsie', ' cu sutura', 200, 30),
+(16, 7, 1, 'Biopsie', 'fara sutura', 100, 20),
+(17, 8, 4, 'Consultatie', 'alergologie pediatrica', 200, 30),
+(18, 9, 2, 'Consultatie ', 'stomatolgie', 50, 20),
+(19, 9, 2, 'Implant', 'undefined', 200, 30),
+(20, 9, 2, 'Aparat dentar', 'Pachet aparat dentar din Safir (per arcada)', 2500, 120),
+(22, 10, 6, 'Coafura simpla', 'spalat + coafat', 150, 60),
+(23, 11, 8, 'tratament facial', 'undefined', 50, 30),
+(24, 12, 9, 'unghii simple', 'mani + pedi', 100, 30),
+(25, 12, 9, 'unghii gel', 'mani', 200, 45);
+
+DROP TABLE IF EXISTS "public"."client";
+-- This script only contains the table creation statements and does not fully represent the table in database. It's still missing: indices, triggers. Do not use it as backup.
+
+-- Table Definition
+CREATE TABLE "public"."client" (
+    "id" int4 NOT NULL,
+    "nume" text NOT NULL,
+    "email" text NOT NULL,
+    "password" text NOT NULL,
+    "tel" int4 NOT NULL,
+    "avatar" text,
+    PRIMARY KEY ("id")
+);
+
+DROP TABLE IF EXISTS "public"."programari";
+-- This script only contains the table creation statements and does not fully represent the table in database. It's still missing: indices, triggers. Do not use it as backup.
+
+-- Table Definition
+CREATE TABLE "public"."programari" (
+    "id" int4 NOT NULL,
+    "numeclient" text NOT NULL,
+    "prenumeclient" text NOT NULL,
+    "emailclient" text NOT NULL,
+    "telclient" text NOT NULL,
+    "id_serviciu" int4,
+    "id_users" int4,
+    "id_firma" int4,
+    "data_programare" timestamp NOT NULL,
+    CONSTRAINT "programari_id_serviciu_fkey" FOREIGN KEY ("id_serviciu") REFERENCES "public"."servicii"("id") ON DELETE CASCADE,
+    CONSTRAINT "programari_id_users_fkey" FOREIGN KEY ("id_users") REFERENCES "public"."users"("id") ON DELETE CASCADE,
+    CONSTRAINT "programari_id_firma_fkey" FOREIGN KEY ("id_firma") REFERENCES "public"."firme"("id") ON DELETE CASCADE,
+    PRIMARY KEY ("id")
+);
+
+INSERT INTO "public"."programari" ("id", "numeclient", "prenumeclient", "emailclient", "telclient", "id_serviciu", "id_users", "id_firma", "data_programare") VALUES
+(1, 'Lodina', 'Razvan', 'rlodina99@gmail.com', '0773785233', 22, 10, 1, '2022-06-28 10:20:00');
+INSERT INTO "public"."programari" ("id", "numeclient", "prenumeclient", "emailclient", "telclient", "id_serviciu", "id_users", "id_firma", "data_programare") VALUES
+(2, 'Lodina', 'Razvan', 'rlodina99@gmail.com', '0773785233', 7, 5, 1, '2022-06-28 10:27:00');
+
