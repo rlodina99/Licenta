@@ -43,7 +43,7 @@ export default function DataTable({ columns, items, pageSize, orderBy = null, me
     const style = col.noSort ? null : { cursor: 'pointer' };
     return (
       <td onClick={() => !col.noSort && setOrderBy(col.field)} style={style} key={col.field} width={col.width}>
-        {(col.label || col.field)}
+        <span style={{whiteSpace: 'nowrap'}}>{(col.label || col.field)}</span>
         {order?.field === col.field && (order.asc ? <span> &#8593;</span> : <span> &#8595;</span>)}
       </td>
     )

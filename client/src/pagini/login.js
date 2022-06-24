@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 
 
 export default function Login({ onLoginCompleted }) {
-  const [email, setEmail] = useState('adonis@gmail.com');
+  const [email, setEmail] = useState('hairstyle@gmail.com');
   const [password, setPassword] = useState('123');
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);

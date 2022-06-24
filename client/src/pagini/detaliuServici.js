@@ -15,7 +15,7 @@ export default function DetaliuServici() {
     const [showRed, setShowRed] = useState(false);
     const [showGreen, setShowGreen] = useState(false);
     const [show, setShow] = useState(false);
-    
+
     var today = null, an = 0, luna = 0, ziua = 0, ora = 0, minutul = 0;
 
     var idx = false;
@@ -85,9 +85,9 @@ export default function DetaliuServici() {
                 prenume,
                 email,
                 tel,
-                id_serviciu:idServiciu,
-                id_users:user.id,
-                data_programare:datetime
+                id_serviciu: idServiciu,
+                id_users: user.id,
+                data_programare: datetime
 
             })
         }
@@ -103,101 +103,29 @@ export default function DetaliuServici() {
     }
 
 
-    function Example() {
-
-        
-
-        return (
-            <>
 
 
-                <Modal show={show} >
-                    <Modal.Header>
-                        <Modal.Title>Rezervare {datetime}  </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-
-                        <div className="row mt-2">
-                            {/* Numele */}
-                            <div className="col-md-6"><label className="labels">Nume</label>
-                                <input type="text" className="form-control" id="nume" placeholder="nume client"
-                                    value={nume} onChange={(e) => { setNume(e.target.value); setNumeError(null) }} />
-                                {
-                                    numeError && <div style={{ color: 'red', fontSize: '10pt' }}>{numeError}</div>
-                                }</div>
-
-                            {/* Prenumele */}
-                            <div className="col-md-6"><label className="labels">Prenume</label>
-                                <input type="text" className="form-control" id="nume" placeholder="prenume client"
-                                    value={prenume} onChange={(e) => { setPrenume(e.target.value); setPrenumeError(null) }} />
-                                {
-                                    prenumeError && <div style={{ color: 'red', fontSize: '10pt' }}>{prenumeError}</div>
-                                }
-                            </div>
-                        </div>
-
-                        {/* Telefon */}
-                        <div className="col-md-12"><label className="labels">Mobile Number</label>
-                            <input type="text" className="form-control" id="tel" aria-describedby="tel" placeholder="phone number"
-                                value={tel} onChange={(e) => { setTel(e.target.value); setTelError(null) }} />
-                            {
-                                telError && <div style={{ color: 'red', fontSize: '10pt' }}>{telError}</div>
-                            } </div>
-
-                        {/* Email */}
-                        <div className="col-md-12"><label className="labels">Email ID</label>
-                            <input type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="enter email"
-                                value={email} onChange={(e) => { setEmail(e.target.value); setEmailError(null) }} />
-                            {
-                                emailError && <div style={{ color: 'red', fontSize: '10pt' }}>{emailError}</div>
-                            }</div>
-
-
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="danger" onClick={handleClose}>
-                            Cancel
-                        </Button>
-                        <Button variant="success" onClick={Exec}>
-                            Programeaza
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-            </>
-        );
-    }
-
-
-
-
-    function AlertDismissibleExample() {
-
+    function AlertDataInvalid() {
 
         if (showRed) {
             return (
                 <>
-
-
                     <Modal show={showRed}  >
-                       
 
                         <div className="alert alert-danger" role="alert">
-                        Eroare salvare data , va rog selectati o alta data!
+                            Eroare salvare data , va rog selectati o alta data!
                         </div>
                         <Modal.Footer>
-                        <Button variant="danger" onClick={handleCloseWarning}>
-                            X
-                        </Button>
-                       
-                    </Modal.Footer>
+                            <Button variant="danger" onClick={handleCloseWarning}>
+                                X
+                            </Button>
+
+                        </Modal.Footer>
                     </Modal>
 
-
                 </>
-
             );
         }
-
 
 
     }
@@ -273,26 +201,35 @@ export default function DetaliuServici() {
             minutul = (minutul * 10) + parseInt(datetime[i]);
         }
 
-        if (an < today.getFullYear() || luna < (today.getMonth() + 1) || ziua < today.getDate()) {
-            // alert("Eroare salvare data , va rog selectati o alta data!");
+        if (an < today.getFullYear()) {
             setShowRed(true);
             return;
         }
-        else {
-            if (an === today.getFullYear() && luna === (today.getMonth() + 1) && ziua === today.getDate()) {
-                if (ora < today.getHours()) {
-                    setShowRed(true);
-                    return;
-                }
-                else if (ora === today.getHours()) {
-                    setShowRed(true);
-                    return;
-                }
+        else
+            if (an === today.getFullYear() && luna < (today.getMonth() + 1)) {
+                setShowRed(true);
+                return;
             }
-        }
+            else
+                if (an === today.getFullYear() && luna === (today.getMonth() + 1) && ziua < today.getDate()) {
+                    setShowRed(true);
+                    return;
+                }
+                else {
+                    if (an === today.getFullYear() && luna === (today.getMonth() + 1) && ziua === today.getDate()) {
+                        if (ora < today.getHours()) {
+                            setShowRed(true);
+                            return;
+                        }
+                        else if (ora === today.getHours()) {
+                            setShowRed(true);
+                            return;
+                        }
+                    }
+                }
 
 
-        
+
         console.log("handleShow()");
         handleShow();
 
@@ -345,14 +282,70 @@ export default function DetaliuServici() {
                 </div>
                 <br></br>
                 <br></br>
-                <button type="submit" className="btn btn-success mb-5" onClick={() =>  rezervare() }>Continua</button>
+                <button type="submit" className="btn btn-success mb-5" onClick={() => rezervare()}>Continua</button>
                 &nbsp;
                 <button type="cancel" className="btn btn-danger mb-5" onClick={() => navigate(`/`)}>Cancel</button>
 
             </div>
 
-            <AlertDismissibleExample />
-            <Example />
+            <AlertDataInvalid />
+
+            {show &&
+
+                <Modal show={true} >
+                    <Modal.Header>
+                        <Modal.Title>Rezervare {datetime}  </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+
+                        <div className="row mt-2">
+                            {/* Numele */}
+                            <div className="col-md-6"><label className="labels">Nume</label>
+                                <input type="text" className="form-control" id="nume" placeholder="nume client"
+                                    value={nume} onChange={(e) => { setNume(e.target.value); setNumeError(null) }} />
+                                {
+                                    numeError && <div style={{ color: 'red', fontSize: '10pt' }}>{numeError}</div>
+                                }</div>
+
+                            {/* Prenumele */}
+                            <div className="col-md-6"><label className="labels">Prenume</label>
+                                <input type="text" className="form-control" id="nume" placeholder="prenume client"
+                                    value={prenume} onChange={(e) => { setPrenume(e.target.value); setPrenumeError(null) }} />
+                                {
+                                    prenumeError && <div style={{ color: 'red', fontSize: '10pt' }}>{prenumeError}</div>
+                                }
+                            </div>
+                        </div>
+
+                        {/* Telefon */}
+                        <div className="col-md-12"><label className="labels">Mobile Number</label>
+                            <input type="text" className="form-control" id="tel" aria-describedby="tel" placeholder="phone number"
+                                value={tel} onChange={(e) => { setTel(e.target.value); setTelError(null) }} />
+                            {
+                                telError && <div style={{ color: 'red', fontSize: '10pt' }}>{telError}</div>
+                            } </div>
+
+                        {/* Email */}
+                        <div className="col-md-12"><label className="labels">Email ID</label>
+                            <input type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="enter email"
+                                value={email} onChange={(e) => { setEmail(e.target.value); setEmailError(null) }} />
+                            {
+                                emailError && <div style={{ color: 'red', fontSize: '10pt' }}>{emailError}</div>
+                            }</div>
+
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="danger" onClick={handleClose}>
+                            Cancel
+                        </Button>
+                        <Button variant="success" onClick={Exec}>
+                            Programeaza
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+            }
 
 
         </>

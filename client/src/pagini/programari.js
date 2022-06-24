@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import DataTable from "../componente/dataTable";
 import { useParams } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
+import {formatTimestamp} from '../Utils'
 
 function Programari({ user }) {
 
@@ -25,7 +26,7 @@ function Programari({ user }) {
   const loadProgramari = () => {
 
     setData(null);
-    fetch(`/api/programari`)
+    fetch(`/api/programari?id_firma=${window.connectedUser.id}`)
       .then(response => response.json())
       .then(programare => {
         if (programare.error) {
@@ -33,7 +34,7 @@ function Programari({ user }) {
         }
         else {
           // console.log(`${programare.length} loaded`);
-          // console.dir(programare);
+          console.dir(programare);
           setData(programare);
 
         }
@@ -67,7 +68,6 @@ function Programari({ user }) {
 
 
   function Delete() {
-
     return (
       <>
         <Modal show={show} >
@@ -75,10 +75,7 @@ function Programari({ user }) {
             <Modal.Title>Atentie </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-
             Suntei sigur ca doriti sa stergeti programarea?
-
-
           </Modal.Body>
           <Modal.Footer>
             <Button variant="success" onClick={handleClose}>
@@ -90,9 +87,7 @@ function Programari({ user }) {
           </Modal.Footer>
         </Modal>
       </>
-
     )
-
   }
 
 
@@ -144,24 +139,25 @@ function Programari({ user }) {
                 width: '20%',
               },
               {
-                label: "id_serviciu",
-                field: "id_serviciu",
+                label: "Denumire Serviciui",
+                field: `den_serviciu`,
                 width: '5%',
               },
               {
-                label: "id Personal",
-                field: "id_users",
+                label: "Nume Personal",
+                field: `user_name`,
                 width: '5%',
               },
               {
                 label: "Data Programare",
                 field: "data_programare",
                 width: '50%',
+                render : item => <span>{formatTimestamp(item.data_programare)}</span>
               },
-              {
-                width: '100px',
-                render: item => <button type="button" className="btn btn-primary" onClick={() => navigate(`/programari`)}> edit </button>
-              },
+              // {
+              //   width: '100px',
+              //   render: item => <button type="button" className="btn btn-primary" onClick={() => navigate(`/programari`)}> edit </button>
+              // },
               {
 
                 width: '100px',

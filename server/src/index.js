@@ -1,7 +1,7 @@
 const express = require('express');
 // const cookieParser = require('cookie-parser');
 const path = require('path');
-const { execSQL } = require('./db')
+const { execSQL, execSQLScalar } = require('./db')
 
 const app = express()
 const port = 5000
@@ -267,8 +267,14 @@ app.get('/api/serviciu', async (req, res) => {
 
 app.get('/api/programari', async (req, res) => {
 
-
-  let sqlStmt = `SELECT id, numeclient, prenumeclient, telclient, id_serviciu, id_users, data_programare FROM programari`;
+  let sqlStmt = `SELECT P.id, numeclient, prenumeclient, telclient, 
+	id_serviciu, s.denumire as den_serviciu, 
+	p.id_users, u.prenume || ' '  || u.nume as user_name,
+	data_programare 
+FROM programari P
+JOIN servicii S ON S.id = P.id_serviciu
+JOIN users U on U.id = P.id_users
+WHERE ${req.query.id_firma} = P.id_firma`;
 
   try {
     const data = await execSQL(sqlStmt);
@@ -336,7 +342,12 @@ app.post('/api/addProgramare', async (req, res) => {
 
 
   try {
-    await execSQL(`insert into programari (numeclient, prenumeclient, emailclient, telclient, id_serviciu, id_users, data_programare) values ('${nume}', '${prenume}', '${email}', '${tel}', ${id_serviciu}, ${id_users}, '${data_programare}')`);
+    const data = await execSQL(`SELECT id_firma from users where id = ${id_users}`);
+    const { id_firma } = data.rows[0];
+
+    // const id_firma = await execSQLScalar(`SELECT id_firma from users where id = ${id_users}`);
+
+    await execSQL(`insert into programari (numeclient, prenumeclient, emailclient, telclient, id_serviciu, id_users, id_firma, data_programare) values ('${nume}', '${prenume}', '${email}', '${tel}', ${id_serviciu}, ${id_users}, ${id_firma}, '${data_programare}')`);
     res.json({ ok: 1 });
   }
   catch (error) {
