@@ -125,7 +125,7 @@ export default function Register() {
         {/* <!-- Cf input --> */}
         <div className="form-outline mb-4">
           <label className="form-label" >Cf</label>
-          <input type="text" class="form-control" id="telefon" aria-describedby="emailHelp" placeholder="ro 123..."
+          <input type="text" class="form-control" id="cf" aria-describedby="emailHelp" placeholder="ro 123..."
             value={cf} onChange={(e) => { setCf(e.target.value); setCfError(null) }} />
           {
             cfError && <div style={{ color: 'red', fontSize: '10pt' }}>{cfError}</div>
@@ -186,7 +186,7 @@ export default function Register() {
         {/* <!-- Submit button --> */}
 
         <div className="text-center">
-          <button type="button" className="btn btn-success btn-block mb-4" onClick={() => Exec()} >Register</button>
+          <button type="button" id="submit" className="btn btn-success btn-block mb-4" onClick={() => Exec()} >Register</button>
         </div>
 
 

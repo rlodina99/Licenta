@@ -66,7 +66,7 @@ export default function Login({ onLoginCompleted }) {
         {/* <!-- Email input --> */}
         <div className="form-outline mb-4">
           <label className="form-label" htmlFor="form2Example1">Email address</label>
-          <input type="email" id="form2Example1" className="form-control" placeholder="Enter email" 
+          <input type="email" id="email" className="form-control" placeholder="Enter email" 
             defaultValue={email}
             onChange={(e) => { setEmail(e.target.value); setEmailError(null) }} />
           {
@@ -78,7 +78,7 @@ export default function Login({ onLoginCompleted }) {
         {/* <!-- Password input --> */}
         <div className="form-outline mb-4">
           <label className="form-label" htmlFor="form2Example2">Password</label>
-          <input type="password" id="form2Example2" className="form-control" placeholder="Enter password"
+          <input type="password" id="password" className="form-control" placeholder="Enter password"
             value={password} onChange={(e) => { setPassword(e.target.value); setPasswordError(null) }} />
           {
             passwordError && <div style={{ color: 'red', fontSize: '10pt' }}>{passwordError}</div>
@@ -104,7 +104,7 @@ export default function Login({ onLoginCompleted }) {
         {/* <!-- Submit button --> */}
 
         <div className="text-center">
-          <button type="button" className="btn btn-primary btn-block mb-4" onClick={() => Exec()} >Sign in</button>
+          <button type="button" id='login' className="btn btn-primary btn-block mb-4" onClick={() => Exec()} >Sign in</button>
         </div>
 
         {/* <!-- Register buttons --> */}
